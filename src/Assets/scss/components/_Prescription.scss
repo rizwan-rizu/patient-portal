@@ -1,0 +1,30 @@
+.prescription{
+    width: 850px;
+    top: 80px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 30px;
+
+        .head{
+            background-color: #f7f7f7;
+            padding: 10px 20px;
+        }
+
+        .prescrtionForm{
+            padding-bottom: 30px;
+            padding-top: 30px;
+        }
+
+        #submit{
+            text-align: center;
+            width: 100%;
+            padding-top: 20px;
+
+        }
+        
+        #submitbtn{
+            padding: 13px 40px;
+        }
+}
+

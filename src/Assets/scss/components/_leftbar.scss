@@ -1,0 +1,27 @@
+.left-bar{
+    background-color: $grey-light;
+    color: black;
+    position: fixed;
+    top: 64px;
+    bottom: 0px;
+    left: 0px;
+    width: 250px;
+    border-left:  1px solid whitesmoke;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+.left-bar-head{
+    background-color:rgba(0, 0, 0, 0.04);
+    height: 50px;
+    padding: 10px;
+
+        h6{
+        text-align: center;
+        margin-top: 10px;
+
+        }
+           
+            #head-label{
+                text-decoration: none;
+                color: black;
+            }
+}

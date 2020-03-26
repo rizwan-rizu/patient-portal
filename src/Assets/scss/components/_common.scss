@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+// login page component
+
+.login{
+  background: linear-gradient(45deg, #01386e, #014f9a);
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+
+
+    .form-container{
+      width: 325px;
+      padding: 40px;
+      background-color: $white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0px 0px 5px #545252;
+
+        #sign-label{
+          margin-left: 95px;
+          padding-bottom: 20px;
+        }
+        .textfield{
+          margin-bottom: 12px;
+        }
+        #login-btn{
+          padding: 11px 139px;
+        }
+        #signup-label{
+          margin-top: 30px;
+          margin-left: 37px;
+        }
+    }
+    
+
+
+}
+// registeration page component
+
+.Register{
+    background: linear-gradient(45deg, #01386e, #014f9a);
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: auto;
+    .form-container{
+      width: 500px;
+      padding: 40px;
+      background-color: $white;
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0px 0px 5px #545252;
+
+        #register-label{
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .sign-up-btn{
+          text-align: center;
+          margin-top: 25px;
+
+            button{
+              padding: 13px 50px;
+            }
+        }
+        #login-label{
+          margin-top: 20px;
+        }
+
+      }
+}
+
+// dashboard component
+
+.content{
+  padding: 70px 25px 70px 275px
+}
