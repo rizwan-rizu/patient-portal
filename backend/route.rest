@@ -1,0 +1,56 @@
+GET http://localhost:5000/subscribers/
+
+###
+
+GET http://localhost:5000/subscribers/123
+
+
+
+###
+
+POST http://localhost:5000/subscribers
+Content-Type: application/json 
+
+{
+    "firstname" :"abc",
+    "lastname" : "abc",
+    "_id": "1124",
+    "age" : "24",
+    "email":"abc@abc.com",
+    "phone": "1234567",
+    "address":"abc street",
+    "specialization":"abc",
+    "hospital":"abc",
+    "password":"rizu"
+}
+
+###
+
+
+
+POST  http://localhost:5000/subscribers/login
+Content-Type: application/json 
+
+{
+    "_id" :"12" ,
+    "password":"abc"
+}
+
+###
+
+GET http://localhost:5000/history
+
+###
+
+GET http://localhost:5000/history/123
+
+###
+
+POST http://localhost:5000/history
+Content-Type: application/json
+
+{
+    "patientid" : "14",
+    "diagnose" : "heart",
+    "bloodglucose":"123"
+}

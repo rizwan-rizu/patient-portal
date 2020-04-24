@@ -1,0 +1,1 @@
+export {userpatientstate} from './reducer'
