@@ -1,107 +1,129 @@
 import React, { useState } from 'react'
 import { Paper, Typography, TextField, Button, Container, Box , Link } from '@material-ui/core'
-// import FetchRandomUser from '../../ApiCall'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 import {useDispatch , useSelector} from 'react-redux'
 import {patientid_action} from '../../redux/actions'
 import {patientInfo_action} from '../../redux/actions'
 import {patientstate} from '../../redux/selectors'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
+import PageHeader from '../../components/common/header'
+import {Formik} from 'formik'
+import * as Yup from "yup";
+import { connect } from 'react-redux'
 
-const PatientID = () => {
-    // constructor(props){
-    //     super(props)
-    //     this.state={
-    //         user_id : ''
-    //     }
-    //     this.handleChange = this.handleChange.bind(this)
-    //     this.handleclick = this.handleclick.bind(this)
-    //     this.handleSubmit = this.handleSubmit.bind(this)
-    // }
 
-    // handleChange(e){
-    //     this.setState({
-    //         [e.target.name] : e.target.value
-    //     })
-    // }
-    // handleclick(){
-    //     localStorage.setItem("user_id", this.state.user_id)
-    // }
 
-    // handleSubmit(e){
-    //     e.preventDefault()
-    // }
+
+class PatientID  extends React.Component {
+    constructor(props){
+        super(props)
+        this.state={
+             isUser: false
+        }
+   
+
     
-    // render(){
-    const dispatch = useDispatch();
-    const handleChange = (e) =>{
-        dispatch(patientid_action(e.target.value))
-        
     }
-    const PatientIDState= useSelector(patientstate).PatientReducer
+    // const dispatch = useDispatch();
 
-    const handleClick = () => {
+render(){
 
-            axios.get( "http://localhost:5000/subscribers/" + PatientIDState._id)
-
-            .then ((res) =>{
-                if (!res.data){
-                    console.log("user not found")
-                }
-                else if(res.data){
-                    dispatch(patientInfo_action(res.data))
-                }
-                
-            }).catch(Error =>{
-                    console.log(Error)
-                })
-
-                return <Redirect to="/dashboard/patientsection" push />
+    if (this.state.isUser){
+        return <Redirect to="/dashboard/patientsection" />
     }
-    // console.log(post)
-    // if(post){
-        
-    // }
-    
+
     return(
         
         <Box>
+            <PageHeader title="GET PATIENT HISTORY" />
+            
             <Paper elevation={3} className="id-container">
                 <Box className="head" >
-                    <Typography variant="h6" id="id-head">
-                        Please enter the patient ID
+                    <Typography variant="body1" id="id-head">
+                        PLEASE ENTER PATIENT ID
                     </Typography>
                     <Container fixed>
-                        <form>
-                        <Box id="id-textbox">
-                            <TextField
-                                id="outlined-textarea"
-                                label="Patient ID"
-                                placeholder="Numbers between two dashes of CNIC"
-                                name="patient_id"
-                                multiline
-                                variant="outlined"
-                                onChange={e=>handleChange(e)}
-                                required
-                            />
-                        </Box>
-                        <Box id="id-button">
-                            <NavLink to="/dashboard/patientsection" style={{textDecoration:"none", color:"black"}}>
-                                <Button onClick={handleClick} variant="contained">Submit</Button>
-                            </NavLink>
-                        </Box>
-                        </form>
+                        <Formik
+                                    initialValues = {{
+                                        _id: "", 
+
+                                    }}
+                                    onSubmit={(values, { setSubmitting }) => {
+                                        console.log("Logging in", values)
+                                        axios.get( "http://localhost:5000/subscribers/" + values._id)
+                                        .then ((res) =>{
+                                            if (typeof res.data === "string"){
+                                                alert("user not found")
+                                            }
+                                            else if(typeof res.data === "object"){
+                                               this.props.dispatch(patientInfo_action(res.data))
+                                                this.setState({
+                                                    isUser : true
+                                                })
+                                            }
+                                            
+                                        }).catch(Error =>{
+                                                console.log(Error)
+                                            })
+                                    
+                                    }}
+                                    validationSchema = {Yup.object().shape({
+                                        _id: Yup.string().required("Patient ID is required"),
+                                    })}
+                                >
+                            {
+                                props => {
+                                    const {values , touched, errors, handleChange, handleBlur, handleSubmit}= props;
+                                    return (
+                                    <form onSubmit={handleSubmit}>
+                                    <Box id="id-textbox">
+                                        <TextField
+                                            id="outlined-textarea"
+                                            label="Patient ID"
+                                            placeholder="CNIC of patient"
+                                            name="_id"
+                                            multiline
+                                            variant="outlined"
+                                            value={ values._id}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={errors._id && touched._id && "error"}
+                                        />
+                                        {errors._id && touched._id && (
+                                                <div className="error-message">{errors._id}</div>
+                                            )}
+                                    </Box>
+                                    <Box id="id-button">
+                                        {/* <NavLink to="/dashboard/patientsection" style={{textDecoration:"none", color:"black"}}> */}
+                                            <Button
+                                                type="submit"
+                                                className="custom_btn"
+                                                variant="contained" 
+                                                
+                                            > Submit
+                                            </Button>
+                                        {/* </NavLink> */}
+                                    </Box>
+                                    </form>
+                                    )
+                                }
+                            }
+                        </Formik>
                     </Container>
-                    
-                    {/* <FetchRandomUser /> */}
                 </Box>
             </Paper>
         </Box>
 
     )
-    // }
-
+ 
+    }
+}
+const mapDispatchToprops = (dispatch) =>{
+    return{
+        dispatch : (user) => dispatch(patientInfo_action(user))
+        
+    }
     
 }
-export default PatientID
+export default connect(mapDispatchToprops)(PatientID)

@@ -13,7 +13,10 @@ const PatientHistorySchema = new mongoose.Schema({
     dosage : String,
     usagetime : String,
     tests : String,
-    comments: String
+    comments: String,
+    doctorname : String,
+    specialization : String,
+    hospital : String
 
 })
 

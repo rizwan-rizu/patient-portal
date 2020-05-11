@@ -10,7 +10,7 @@ const subscriberschema = new mongoose.Schema({
     email :String,
     phone :Number ,
     address :String,
-    speacialization :String ,
+    specialization :String ,
     hospital : String,
 })
 

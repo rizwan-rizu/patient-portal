@@ -1,14 +1,15 @@
 .prescription{
     width: 850px;
-    top: 80px;
+    top: 10px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    padding-bottom: 30px;
+    // padding-bottom: 30px;
 
         .head{
-            background-color: #f7f7f7;
+            background-color: $prussian;
             padding: 10px 20px;
+            color: $white;
         }
 
         .prescrtionForm{
@@ -25,6 +26,8 @@
         
         #submitbtn{
             padding: 13px 40px;
+            color: $white;
+            background-color: $prussian;
         }
 }
 

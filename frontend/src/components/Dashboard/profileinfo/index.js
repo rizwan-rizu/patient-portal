@@ -3,11 +3,13 @@ import { Box } from '@material-ui/core';
 import Profile from '../../Profile'
 import {useSelector} from 'react-redux'
 import { userstate } from '../../../redux/selectors';
+import PageHeader from '../../common/header'
 
 function ProfileInfo() {
     const user = useSelector(userstate).userReducer
     return (
         <Box>
+            <PageHeader title="PROFILE" />
             <Profile 
                 user_firstName= {user.firstname}
                 user_lastName = {user.lastname}

@@ -8,7 +8,7 @@ const DEFAULT_STATE = {
     email : '',
     address : '',
     password : '',
-    speacialization: '',
+    specialization: '',
     hospital : '',
 };
 

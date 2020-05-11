@@ -34,7 +34,10 @@ router.post('/', async (req, res) => {
             dosage : req.body.dosage,
             usagetime : req.body.usagetime,
             tests : req.body.tests,
-            comments: req.body.comments
+            comments: req.body.comments,
+            doctorname : req.body.doctorname,
+            specialization : req.body.specialization,
+            hospital : req.body.hospital
             })
         await user.save()
         res.status(201).send("created succesfully")

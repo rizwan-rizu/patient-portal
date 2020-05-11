@@ -32,7 +32,7 @@ router.post('/', async (req,res) => {
             address: req.body.address,
             specialization: req.body.specialization,
             hospital : req.body.hospital,
-            password : hashedpassword
+            password : hashedpassword,
     })
          await user.save()
         res.status(201).send('you are registered successfully')
@@ -81,7 +81,7 @@ async function getsubscriber(req , res , next){
     try{
         user = await subscriber.findById(req.params.id)
         if(user == null){
-            return res.status(404).json({message: 'cannot find the subscriber'})
+            return res.send('cannot find the subscriber')
         }
     } catch(err){
         return res.status(500).json({message:err.message})

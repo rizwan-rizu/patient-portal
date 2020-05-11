@@ -7,8 +7,9 @@
     transform: translateX(-50%);
     
         #id-head{
-            background-color: #f7f7f7;
+            background-color: $prussian;
             padding: 15px;
+            color: $white;
         }
         #outlined-textarea{
             width: 280px;
@@ -22,6 +23,12 @@
 
             Button{
                 padding: 10px 40px;
+                background-color: $prussian;
+                color: $white;
+
+                &:hover{
+                    background-color: $steel;
+                }
             }
         }
 }

@@ -2,7 +2,8 @@ import React from 'react'
 import { Box , Grid, Typography, Avatar, Divider,List, ListItem, ListItemText, Paper,IconButton } from '@material-ui/core';
 import blank from '../../Assets/images/blank.png';
 import pp from '../../Assets/images/pp.jpg'
-import EditIcon from '@material-ui/icons/Edit';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+
 const Profile =({
     user_firstName,
     user_lastName,
@@ -13,61 +14,64 @@ const Profile =({
     user_address,
 }) =>{
     return(
-        <Box className="profile">
+        <div>
+            <Box className="profile">
+
             {/* <h1>{user.name},{user.firstname},{user.password},{user.lastname},{user.phone},{user.speacialization}</h1> */}
             <Paper elevation={3}>
             <Box id="profile-head">
-                <Typography variant="h5">{user_firstName}'s Profile</Typography>
-                <IconButton size="small" style={{float: "right" , top:" -30px"}}> 
-                    <EditIcon />
+                <Typography variant="h6">{user_firstName}'s Profile</Typography>
+                <IconButton style={{float: "right" , top:" -38px"}}> 
+                    <EditOutlinedIcon fontSize="small" style={{color:"white"}}/>
                 </IconButton>
             </Box>
                 <Grid container spacing={2}>
-                    <Grid item md={4}  style={{ textAlign: "center"}}>
+                    <Grid item md={5}  style={{ textAlign: "center"}}>
                         <img id="profile-pic" alt="pic" src={blank}></img>
                     </Grid>
-                    <Grid item md={8}>
+                    <Grid item md={7} style={{marginBottom:"25px"}}>
                         <Grid container spacing={3}>
-                            <Grid item xs={6}>First Name :</Grid>
-                            <Grid item xs={6}>{user_firstName}</Grid>
+                            <Grid item xs={4}>First Name :</Grid>
+                            <Grid item xs={8}>{user_firstName}</Grid>
                         </Grid>
 
                         <Grid container spacing={3}>
-                            <Grid item xs={6}>Last Name :</Grid>
-                            <Grid item xs={6}>{user_lastName}</Grid>
+                            <Grid item xs={4}>Last Name :</Grid>
+                            <Grid item xs={8}>{user_lastName}</Grid>
                         </Grid>
 
                         <Grid container spacing={3}>
-                            <Grid item xs={6}>CNIC :</Grid>
-                            <Grid item xs={6}>{user_cnic}</Grid>
+                            <Grid item xs={4}>CNIC :</Grid>
+                            <Grid item xs={8}>{user_cnic}</Grid>
                         </Grid>
 
                         <Grid container spacing={3}>
-                            <Grid item xs={6}>Age :</Grid>
-                            <Grid item xs={6}>{user_age}</Grid>
+                            <Grid item xs={4}>Age :</Grid>
+                            <Grid item xs={8}>{user_age}</Grid>
                         </Grid>
 
                         <Grid container spacing={3}>
-                            <Grid item xs={6}>Mobile No :</Grid>
-                            <Grid item xs={6}>{user_mobile}</Grid>
+                            <Grid item xs={4}>Mobile No :</Grid>
+                            <Grid item xs={8}>{user_mobile}</Grid>
                         </Grid>
 
                         <Grid container spacing={3}>
-                            <Grid item xs={6}>Email :</Grid>
-                            <Grid item xs={6}>{user_email}</Grid>
+                            <Grid item xs={4}>Email :</Grid>
+                            <Grid item xs={8}>{user_email}</Grid>
                         </Grid>
 
                         <Grid container spacing={3}>
-                            <Grid item xs={6}>Address:</Grid>
-                            <Grid item xs={6}>{user_address}</Grid>
+                            <Grid item xs={4}>Address:</Grid>
+                            <Grid item xs={8}>{user_address}</Grid>
                         </Grid>
                     </Grid>
-
                 </Grid>
             </Paper>
             
             
         </Box>
+        </div>
+        
     )
 }
 export default Profile

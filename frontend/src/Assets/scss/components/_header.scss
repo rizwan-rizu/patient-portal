@@ -1,0 +1,9 @@
+header { 
+    padding-left: 58px;
+    transition: 0.3s ease all;
+    &.open{
+        padding-left: 250px;
+        transition: 0.3s ease all;
+
+    }
+}

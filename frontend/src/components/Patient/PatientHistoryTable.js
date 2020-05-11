@@ -6,8 +6,9 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import axios from 'axios'
-import { Grid } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
+import { Grid ,Box} from '@material-ui/core';
+import { patientstate } from '../../redux/selectors';
+import {useSelector} from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,25 +25,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function History() {
-  let historyArr= JSON.parse(localStorage.getItem("history")) 
+export default function History({patientID}) {
+
+  const [History, setHistory] = React.useState([]);
   
+  // const PatientIDState= useSelector(patientstate).PatientReducer
   useEffect(() => {
-    axios.get("http://localhost:5000/history/123")
+    axios.get("http://localhost:5000/history/" + patientID)
     .then ((res) =>{
+      
       if (!res.data){
           console.log("user not found")
           }
       else if(res.data){
           // historyArr = res.data;
-          localStorage.setItem("history",JSON.stringify(res.data))
+          // localStorage.setItem("history",JSON.stringify(res.data))
+            setHistory(res.data)
       }  
     })
     .catch(Error =>{
         console.log(Error)
     })
-  })
-    
+  },[])
+
+  // const historyArr = JSON.parse(localStorage.getItem("history"))
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -52,24 +59,114 @@ export default function History() {
 
   return (
     <div className={classes.root}>
-      {console.log('islamabad ', historyArr)}
-      {historyArr.map((item, i) => (
-        <ExpansionPanel key={i} expanded={expanded === (item.historylevel)} onChange={handleChange(item.historylevel)}>
+      {/* {console.log('islamabad ', History)} */}
+      {History.map((item, i) => (
+        <ExpansionPanel key={i} expanded={expanded === (item._id)} onChange={handleChange(item._id)}>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
           >
             <Typography className={classes.heading}>{item.diagnose}</Typography>
-            <Typography className={classes.secondaryHeading}>{item.date}</Typography>
+            <Typography className={classes.secondaryHeading} >{item.date}</Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography variant="h5">History Details</Typography>
-            
-            <Grid container spacing={3}>
-              <Grid item >Doctory Name: </Grid>
-              <Grid item ></Grid>
-            </Grid>
+          <ExpansionPanelDetails style={{display:"block"}}>
+              <Box className="doctor-details">
+                <Grid container style={{padding: "10px 25px"}} >
+                  <Grid style={{background: "#f7f7f7",width: "100%",padding: "10px"}} item xs={12}>
+                    <Typography variant="h6">DR {item.doctorname}</Typography>
+                    <Typography style={{paddingLeft:"10px"}} variant="body1">[ {item.specialization} ]</Typography>
+                    <Typography style={{paddingLeft:"10px"}} variant="body1">[ {item.hospital} ]</Typography>
+                  </Grid>
+                </Grid>
+            </Box>
+            <Box className="doctors-review">
+                  <Grid container style={{padding: "10px 25px"}} >
+                    <Grid  item xs={12} style={{background: "#f7f7f7",width: "100%",padding: "10px"}}>
+                      <Typography variant="body1">DIAGNOSE WITH:</Typography>
+                    </Grid>
+                    <Grid item xs={12} style={{padding:"15px"}} >
+                      <Typography variant="subtitle1">
+                      [ {item.diagnose} ]
+                      </Typography>
+                    </Grid>
+                  </Grid>
+            </Box>
+            <Box className="regular-checkup-details">
+                <Grid container style={{padding: "10px 25px"}} >
+                  <Grid style={{background: "#f7f7f7",width: "100%",padding: "10px"}} item xs={12}>
+                    <Typography variant="body1">REGULAR CHECKUP DETAILS :</Typography>
+                  </Grid>
+                  <Grid item xs={3} style={{padding:"15px"}} >
+                    <Typography variant="subtitle1">Blood pressure :</Typography>
+                    <Typography variant="subtitle2">[ {item.bloodpressure} ]</Typography>
+                  </Grid>
+                  <Grid item xs={3} style={{padding:"15px"}}>
+                    <Typography variant="subtitle1">Temperture :</Typography>
+                    <Typography variant="subtitle2">[ {item.temperature} ]</Typography>
+                  </Grid>
+                  <Grid item xs={3} style={{padding:"15px"}}>
+                    <Typography variant="subtitle1">Blood Glucose :</Typography>
+                    <Typography variant="subtitle2">[ {item.bloodgulucose} ]</Typography>
+                  </Grid>
+                  <Grid item xs={3} style={{padding:"15px"}}>
+                    <Typography variant="subtitle1">Pulse Rate :</Typography>
+                    <Typography variant="subtitle2">[ {item.pulserate} ]</Typography>
+                  </Grid>
+                </Grid>
+            </Box>
+            <Box className="medication">
+              <Grid container style={{padding: "10px 25px"}} >
+                  <Grid  item xs={12} style={{background: "#f7f7f7",width: "100%",padding: "10px"}}>
+                    <Typography variant="body1">MEDICATIONS :</Typography>
+                  </Grid>
+                  <Grid item xs={3} style={{padding:"15px"}} >
+                    <Typography variant="subtitle1">Medicine name :</Typography>
+                    <Typography variant="subtitle2">[ {item.medicine} ]</Typography>
+                    <Typography variant="subtitle2">[ Brufen ]</Typography>
+                  </Grid>
+                  <Grid item xs={3} style={{padding:"15px"}}>
+                    <Typography variant="subtitle1">Type :</Typography>
+                    <Typography variant="subtitle2">[ {item.type} ]</Typography>
+                  </Grid>
+                  <Grid item xs={3} style={{padding:"15px"}}>
+                    <Typography variant="subtitle1">Dosage :</Typography>
+                    <Typography variant="subtitle2">[ {item.dosage} ]</Typography>
+                  </Grid>
+                  <Grid item xs={3} style={{padding:"15px"}}>
+                    <Typography variant="subtitle1">Duration :</Typography>
+                    <Typography variant="subtitle2">[ {item.usagetime} ]</Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+              <Box className="laboratory-test">
+                <Grid container style={{padding: "10px 25px"}} >
+                  <Grid  item xs={12} style={{background: "#f7f7f7",width: "100%",padding: "10px"}}>
+                    <Typography variant="body1">LABORATORY TESTS :</Typography>
+                  </Grid>
+                  <Grid item xs={6} style={{padding:"15px"}} >
+                    <Typography variant="subtitle1">Test Name :</Typography>
+                    <Typography variant="subtitle2">[ {item.tests} ]</Typography>
+                  </Grid>
+                  <Grid item xs={6} style={{padding:"15px"}}>
+                    <Typography variant="subtitle1">Test Name :</Typography>
+                    <Typography variant="subtitle2"></Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+              <Box className="doctors-review">
+                  <Grid container style={{padding: "10px 25px"}} >
+                    <Grid  item xs={12} style={{background: "#f7f7f7",width: "100%",padding: "10px"}}>
+                      <Typography variant="body1">DOCTOR'S REVIEW :</Typography>
+                    </Grid>
+                    <Grid item xs={12} style={{padding:"15px"}} >
+                      <Typography variant="subtitle1">
+                      [ {item.comments} ]
+                      </Typography>
+                    </Grid>
+                  </Grid>
+              </Box>
           
-            <Grid container spacing={3}>
+          
+             {/* <Grid container spacing={3}>
               <Grid item >Medicines</Grid>
               <Grid item md={6}>
                 <ul>
@@ -80,79 +177,14 @@ export default function History() {
                   }
                 </ul>
               </Grid>
-            </Grid>
+            </Grid> */}
 
           
           </ExpansionPanelDetails>
         </ExpansionPanel>
-      ))}
-      {/* <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.heading}>Diagnose</Typography>
-          <Typography className={classes.secondaryHeading}>Date</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography className={classes.heading}>Users</Typography>
-          <Typography className={classes.secondaryHeading}>
-            You are currently not an owner
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography className={classes.heading}>Advanced settings</Typography>
-          <Typography className={classes.secondaryHeading}>
-            Filtering has been entirely disabled for whole web server
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography className={classes.heading}>Personal data</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel> */}
+      ))} 
+      
+      
     </div>
   );
 }

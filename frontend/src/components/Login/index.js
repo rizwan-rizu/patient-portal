@@ -24,7 +24,7 @@ const Login  = () =>{
                         <LoginForm />
 
                         <Typography id="signup-label">Not Registered?
-                        <Link to="/register"> Create an account</Link>
+                        <Link href="/register"> Create an account</Link>
                         </Typography>
                     </Box>
                 </Paper>

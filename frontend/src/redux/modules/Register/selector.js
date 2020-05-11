@@ -1,0 +1,1 @@
+export {RegisterState} from './reducer'

@@ -6,55 +6,29 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {Redirect} from 'react-router-dom';
+import {RegisterState} from '../../redux/selectors'
+import {useSelector} from 'react-redux'
 
 
 
-class Header extends  Component {
-  constructor(props){
-    super(props);
-    this.state={
-      navigate : false
-    }
-    // this.logout=this.logout.bind(this)
-  }
+
+
+const Header = () => {
+
+  const Loginstate= useSelector(RegisterState).RegisterReducer
   
-  // componentWillMount(){
-  //   if(sessionStorage.getItem("token")){
-  //     console.log("session is present");
-  //   }
-  //   else{
-  //     this.setState({ navigate : true });
-  //   }
-  // }
-
-  // logout() {
-  //   sessionStorage.setItem("token","");
-  //   sessionStorage.clear();
-  // }
-  
-
-  render(){
-    
-    // if (this.state.navigate){
-    //   return <Redirect to={"/login"} push={true} />
-    // }
-    return (
+    return(
       <div>
-        <AppBar  color="default">
+
+        <AppBar  color="default"  className={Loginstate.toggle === true ? ("open") : ("")}>
           <Toolbar>
-            <IconButton edge="start"  color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" >
-              News
-            </Typography>
-            <Button type="button" onClick={this.logout} color="inherit">logout</Button>
+            <Typography variant="h6" style={{fontWeight: "600",opacity: "0.9"}}>
+              DOCTOR PATIENT PORTAL
+            </Typography> 
           </Toolbar>
         </AppBar>
       </div>
     );
-  }
 }
 
 export default Header;

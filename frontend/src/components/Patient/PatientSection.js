@@ -10,9 +10,10 @@ import Box from '@material-ui/core/Box';
 import Profile from '../Profile';
 import SimpleTable from './PatientHistoryTable'
 import { Paper} from '@material-ui/core';
-import PatientHistoryList from './PatientHistoryTable';
+import PatientHistoryTable from './PatientHistoryTable';
 import {useSelector} from 'react-redux'
 import {patientstate} from '../../redux/selectors'
+import PageHeader from '../../components/common/header'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,13 +65,14 @@ function PatientSection() {
   return (
     
     <div className={classes.root} >
+      <PageHeader title="PATIENT SECTION" />
       <AppBar position="static" color="default" >
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs value={value} indicatorColor="primary" textColor="primary" onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Patient Profile" {...a11yProps(0)} />
           <Tab label="Patient History" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} className="patienSection-tab" index={0} >
         <Profile 
           user_firstName = {patient.firstname}
           user_lastName = {patient.lastname}
@@ -81,8 +83,8 @@ function PatientSection() {
           user_email = {patient.email}
         />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <PatientHistoryList />
+      <TabPanel value={value} className="patienSection-tab" index={1} >
+        <PatientHistoryTable patientID={patient._id}/>
       </TabPanel>
     </div>
     

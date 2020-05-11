@@ -1,6 +1,7 @@
 import {PATIENTID} from './actions'
 import {PATIENTINFO} from './actions'
 const DEFAULT_STATE = {
+    patient_id: '',
     firstname : '',
     lastname : '',
     _id : '',
@@ -15,10 +16,15 @@ const DEFAULT_STATE = {
 const PatientType = (state=DEFAULT_STATE, action) => {
     switch (action.type){
         case PATIENTID:
-            return  { _id : action.newState}
+            return  {
+                    ...state,
+                    _id : action.newState
+                }
 
         case PATIENTINFO:
             return action.newState
+                
+            
             
         default:
             return state;
