@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const subscriberschema = new mongoose.Schema({
+const subscribersDoctorSchema = new mongoose.Schema({
     
     firstname : String,
     lastname : String,
@@ -14,4 +14,4 @@ const subscriberschema = new mongoose.Schema({
     hospital : String,
 })
 
-module.exports = mongoose.model('users', subscriberschema)
+module.exports = mongoose.model('usersDoctors', subscribersDoctorSchema)

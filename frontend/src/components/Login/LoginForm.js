@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, TextField, Button } from '@material-ui/core'
 import axios from 'axios'
 import {Redirect, Route} from 'react-router-dom'
-import { patientstate } from '../../redux/selectors'
+import {RegisterState} from "../../redux/selectors"
 import { connect } from 'react-redux'
 import {User_action} from '../../redux/actions'
 import RadioInput from '../common/radio'
@@ -80,8 +80,7 @@ class LoginForm extends React.Component {
 
                  }}
                     onSubmit={(values, { setSubmitting }) => {
-                    console.log("Logging in", values)
-                        axios.post('http://localhost:5000/subscribers/login', values)
+                        axios.post('http://localhost:5000/subscribers' +this.props.LoginState.type+'/login' , values)
                         .then ((res) =>{
                                 
                                 if (typeof res.data === "object"){
@@ -194,7 +193,7 @@ class LoginForm extends React.Component {
 // }
 function mapStateToProps(state){
     return{
-       patient : patientstate(state).PatientReducer
+       LoginState : RegisterState(state).RegisterReducer
     }
 }
 const mapDispatchToprops = (dispatch) =>{

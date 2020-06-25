@@ -15,6 +15,7 @@ import PatientHistory from '../history';
 import {RegisterState} from '../../redux/selectors'
 import { connect } from 'react-redux'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import DoctorProfile from '../DoctorProfile/Index';
 
 
 
@@ -65,6 +66,7 @@ class Dashboard extends React.Component{
                                 <Route exact path="/dashboard/patientsection" component={PatientSection} />
                                 <Route exact path="/dashboard/Prescription" component={Prescription} />
                                 <Route exact path="/dashboard/patient-history" component={PatientHistory} />
+                                <Route exact path="/dashboard/doctors" component={DoctorProfile} />
                             </Switch>
                     </Box>
                 </Router>

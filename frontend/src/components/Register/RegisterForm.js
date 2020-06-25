@@ -72,7 +72,7 @@ const RegisterForm = () => {
                  }}
                     onSubmit={(values, { setSubmitting }) => {
                     console.log("Logging in", values)
-                        axios.post("http://localhost:5000/subscribers", values)
+                        axios.post("http://localhost:5000/subscribers" + registerstate.type , values)
                         .then (res =>{
                             alert(res.data)
                             window.location.href = "http://localhost:3000/login/";

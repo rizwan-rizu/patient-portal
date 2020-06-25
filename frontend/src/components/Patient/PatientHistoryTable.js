@@ -9,7 +9,7 @@ import axios from 'axios'
 import { Grid ,Box} from '@material-ui/core';
 import { patientstate } from '../../redux/selectors';
 import {useSelector} from 'react-redux'
-
+import HistoryContent from '../historyContent'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -69,103 +69,25 @@ export default function History({patientID}) {
             <Typography className={classes.secondaryHeading} >{item.date}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails style={{display:"block"}}>
-              <Box className="doctor-details">
-                <Grid container style={{padding: "10px 25px"}} >
-                  <Grid style={{background: "#f7f7f7",width: "100%",padding: "10px"}} item xs={12}>
-                    <Typography variant="h6">DR {item.doctorname}</Typography>
-                    <Typography style={{paddingLeft:"10px"}} variant="body1">[ {item.specialization} ]</Typography>
-                    <Typography style={{paddingLeft:"10px"}} variant="body1">[ {item.hospital} ]</Typography>
-                  </Grid>
-                </Grid>
-            </Box>
-            <Box className="doctors-review">
-                  <Grid container style={{padding: "10px 25px"}} >
-                    <Grid  item xs={12} style={{background: "#f7f7f7",width: "100%",padding: "10px"}}>
-                      <Typography variant="body1">DIAGNOSE WITH:</Typography>
-                    </Grid>
-                    <Grid item xs={12} style={{padding:"15px"}} >
-                      <Typography variant="subtitle1">
-                      [ {item.diagnose} ]
-                      </Typography>
-                    </Grid>
-                  </Grid>
-            </Box>
-            <Box className="regular-checkup-details">
-                <Grid container style={{padding: "10px 25px"}} >
-                  <Grid style={{background: "#f7f7f7",width: "100%",padding: "10px"}} item xs={12}>
-                    <Typography variant="body1">REGULAR CHECKUP DETAILS :</Typography>
-                  </Grid>
-                  <Grid item xs={3} style={{padding:"15px"}} >
-                    <Typography variant="subtitle1">Blood pressure :</Typography>
-                    <Typography variant="subtitle2">[ {item.bloodpressure} ]</Typography>
-                  </Grid>
-                  <Grid item xs={3} style={{padding:"15px"}}>
-                    <Typography variant="subtitle1">Temperture :</Typography>
-                    <Typography variant="subtitle2">[ {item.temperature} ]</Typography>
-                  </Grid>
-                  <Grid item xs={3} style={{padding:"15px"}}>
-                    <Typography variant="subtitle1">Blood Glucose :</Typography>
-                    <Typography variant="subtitle2">[ {item.bloodgulucose} ]</Typography>
-                  </Grid>
-                  <Grid item xs={3} style={{padding:"15px"}}>
-                    <Typography variant="subtitle1">Pulse Rate :</Typography>
-                    <Typography variant="subtitle2">[ {item.pulserate} ]</Typography>
-                  </Grid>
-                </Grid>
-            </Box>
-            <Box className="medication">
-              <Grid container style={{padding: "10px 25px"}} >
-                  <Grid  item xs={12} style={{background: "#f7f7f7",width: "100%",padding: "10px"}}>
-                    <Typography variant="body1">MEDICATIONS :</Typography>
-                  </Grid>
-                  <Grid item xs={3} style={{padding:"15px"}} >
-                    <Typography variant="subtitle1">Medicine name :</Typography>
-                    <Typography variant="subtitle2">[ {item.medicine} ]</Typography>
-                    <Typography variant="subtitle2">[ Brufen ]</Typography>
-                  </Grid>
-                  <Grid item xs={3} style={{padding:"15px"}}>
-                    <Typography variant="subtitle1">Type :</Typography>
-                    <Typography variant="subtitle2">[ {item.type} ]</Typography>
-                  </Grid>
-                  <Grid item xs={3} style={{padding:"15px"}}>
-                    <Typography variant="subtitle1">Dosage :</Typography>
-                    <Typography variant="subtitle2">[ {item.dosage} ]</Typography>
-                  </Grid>
-                  <Grid item xs={3} style={{padding:"15px"}}>
-                    <Typography variant="subtitle1">Duration :</Typography>
-                    <Typography variant="subtitle2">[ {item.usagetime} ]</Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-              <Box className="laboratory-test">
-                <Grid container style={{padding: "10px 25px"}} >
-                  <Grid  item xs={12} style={{background: "#f7f7f7",width: "100%",padding: "10px"}}>
-                    <Typography variant="body1">LABORATORY TESTS :</Typography>
-                  </Grid>
-                  <Grid item xs={6} style={{padding:"15px"}} >
-                    <Typography variant="subtitle1">Test Name :</Typography>
-                    <Typography variant="subtitle2">[ {item.tests} ]</Typography>
-                  </Grid>
-                  <Grid item xs={6} style={{padding:"15px"}}>
-                    <Typography variant="subtitle1">Test Name :</Typography>
-                    <Typography variant="subtitle2"></Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-              <Box className="doctors-review">
-                  <Grid container style={{padding: "10px 25px"}} >
-                    <Grid  item xs={12} style={{background: "#f7f7f7",width: "100%",padding: "10px"}}>
-                      <Typography variant="body1">DOCTOR'S REVIEW :</Typography>
-                    </Grid>
-                    <Grid item xs={12} style={{padding:"15px"}} >
-                      <Typography variant="subtitle1">
-                      [ {item.comments} ]
-                      </Typography>
-                    </Grid>
-                  </Grid>
-              </Box>
-          
-          
+              
+          <HistoryContent
+            patientid = {item.patientid}
+            date = {item.date}
+            diagnose = {item.diagnose}
+            bloodpressure = {item.bloodpressure}
+            temperature = {item.temperature}
+            pulserate ={item.pulserate}
+            bloodgulucose ={item.bloodgulucose}
+            medicine ={item.medicine}
+            type ={item.type}
+            dosage = {item.dosage}
+            usagetime = {item.usagetime}
+            tests ={item.tests} 
+            comments ={item.comments} 
+            doctorname = {item.doctorname}
+            specialization = {item.specialization}
+            hospital = {item.hospital}
+        />
              {/* <Grid container spacing={3}>
               <Grid item >Medicines</Grid>
               <Grid item md={6}>

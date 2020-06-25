@@ -13,8 +13,11 @@ db.once('open', () => console.log("connected to Database"))
 app.use(express.json())
 app.use(cors())
 
-const subscribersRouter = require("./Routes/subscribers")
-app.use('/subscribers', subscribersRouter)
+const subscribersRouter = require("./Routes/subscribersDoctor")
+app.use('/subscribersdoctor', subscribersRouter)
+
+const subscriberPatientRouter = require("./Routes/subscribersPatient")
+app.use('/subscriberspatient', subscriberPatientRouter)
 
 const historyrouter = require('./Routes/patienthistory')
 app.use('/history' , historyrouter)

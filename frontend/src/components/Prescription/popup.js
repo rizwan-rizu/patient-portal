@@ -16,6 +16,7 @@ import axios from 'axios'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import PageHeader from '../../components/common/header'
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
+import HistoryContent from '../historyContent'
 
 
 
@@ -104,7 +105,24 @@ export default function FullScreenDialog() {
 
         <PageHeader title="MEDICLE PRESCRIPTION" headingData= {request.patientid}  heading="Patient ID : " />
 
-          <Box className="popup-content" style={{padding: "30px 200px 30px 200px"}}>
+        <HistoryContent
+          date = {request.date}
+          diagnose = {request.diagnose}
+          bloodpressure = {request.bloodpressure}
+          temperature = {request.temperature}
+          pulserate ={request.pulserate}
+          bloodgulucose ={request.bloodgulucose}
+          medicine ={request.medicine}
+          type ={request.type}
+          dosage = {request.dosage}
+          usagetime = {request.usagetime}
+          tests ={request.tests} 
+          comments ={request.comments} 
+          doctorname = {request.doctorname}
+          specialization = {request.specialization}
+          hospital = {request.hospital}
+        />
+          {/* <Box className="popup-content" style={{padding: "30px 200px 30px 200px"}}>
             <Box className="doctor-details">
                 <Grid container style={{padding: "10px 25px"}} >
                   <Grid style={{background: "#f7f7f7",width: "100%",padding: "10px"}} item xs={8}>
@@ -203,7 +221,7 @@ export default function FullScreenDialog() {
                 </Grid>
             </Box>
             <Divider/>
-          </Box>
+          </Box> */}
       </Dialog>
     </div>
   );

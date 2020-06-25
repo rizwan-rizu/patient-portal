@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
 import { Paper, Typography, TextField, Button, Container, Box , Link } from '@material-ui/core'
 import { Redirect } from 'react-router-dom'
-import {useDispatch , useSelector} from 'react-redux'
-import {patientid_action} from '../../redux/actions'
 import {patientInfo_action} from '../../redux/actions'
-import {patientstate} from '../../redux/selectors'
 import axios from 'axios'
-import { NavLink } from 'react-router-dom'
 import PageHeader from '../../components/common/header'
 import {Formik} from 'formik'
 import * as Yup from "yup";
@@ -37,7 +33,6 @@ render(){
         
         <Box>
             <PageHeader title="GET PATIENT HISTORY" />
-            
             <Paper elevation={3} className="id-container">
                 <Box className="head" >
                     <Typography variant="body1" id="id-head">
@@ -50,8 +45,7 @@ render(){
 
                                     }}
                                     onSubmit={(values, { setSubmitting }) => {
-                                        console.log("Logging in", values)
-                                        axios.get( "http://localhost:5000/subscribers/" + values._id)
+                                        axios.get( 'http://localhost:5000/subscriberspatient/'+ values._id)
                                         .then ((res) =>{
                                             if (typeof res.data === "string"){
                                                 alert("user not found")

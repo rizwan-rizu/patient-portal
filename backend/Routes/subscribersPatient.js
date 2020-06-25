@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const subscriber = require('../models/subscriber')
+const subscriber = require('../models/subscribersPatient')
 const bcrypt = require('bcrypt')
 
 // Getting all
